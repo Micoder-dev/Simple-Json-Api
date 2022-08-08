@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -12,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +36,19 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
 
                         Log.i("RESPONSEVALIDDATA", response + "");
+
+                        try {
+
+                            String mytext = response.getString("mytext");
+                            Toast.makeText(MainActivity.this, mytext + "", Toast.LENGTH_LONG).show();
+
+                            String myimage = response.getString("myimage");
+                            Toast.makeText(MainActivity.this, myimage + "", Toast.LENGTH_LONG).show();
+
+                        } catch (JSONException e) {
+                            Toast.makeText(MainActivity.this, "Something went wrong, please check your internet connection", Toast.LENGTH_SHORT).show();
+                        }
+
 
                     }
                 },
